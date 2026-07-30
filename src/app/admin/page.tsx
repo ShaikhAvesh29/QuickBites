@@ -229,7 +229,7 @@ export default function AdminDashboard() {
         .order("pickup_time", { ascending: true });
 
       if (error) throw error;
-      setOrders((data as Order[]) ?? []);
+      setOrders((data as unknown as Order[]) ?? []);
       setIsOnline(true);
     } catch (err: unknown) {
       console.error("[Admin] fetchOrders:", err);

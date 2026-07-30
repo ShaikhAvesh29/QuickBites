@@ -37,6 +37,7 @@ import {
   UtensilsCrossed,
   Receipt,
   X,
+  Menu,
 } from "lucide-react";
 import { User } from "@supabase/supabase-js";
 import { motion, AnimatePresence } from "framer-motion";
@@ -304,6 +305,7 @@ export default function StudentInterface() {
   const [cart, setCart] = useState<CartItem[]>([]);
   const [loading, setLoading] = useState(true);
   const [activeTab, setActiveTab] = useState("home");
+  const [isSidebarOpen, setIsSidebarOpen] = useState(false);
   const [activeCategory, setActiveCategory] = useState<string>("All");
   const [searchQuery, setSearchQuery] = useState("");
   const [isCheckoutOpen, setIsCheckoutOpen] = useState(false);
@@ -443,16 +445,21 @@ export default function StudentInterface() {
         className="sticky top-0 z-20 glass-card border-b border-slate-200/80">
         <div className="max-w-md mx-auto px-4 pt-4 pb-3">
           <div className="flex justify-between items-center mb-3">
-            <div>
-              <div className="flex items-center gap-1.5">
-                <span className="text-2xl font-black qb-text-gradient tracking-tight">QuickBite</span>
+            <div className="flex items-center gap-2.5">
+              <button onClick={() => setIsSidebarOpen(true)} className="text-slate-600 hover:text-orange-600 transition-colors p-1 -ml-1">
+                <Menu size={24} strokeWidth={2.5} />
+              </button>
+              <div>
+                <div className="flex items-center gap-1.5">
+                  <span className="text-2xl font-black qb-text-gradient tracking-tight">QuickBite</span>
                 <motion.div animate={{ rotate: [0, 15, -10, 15, 0] }} transition={{ repeat: Infinity, repeatDelay: 4, duration: 0.6 }}>
                   <Zap size={18} className="text-orange-500 fill-orange-400" />
                 </motion.div>
               </div>
               <p className="text-xs text-slate-400">{user ? `Hey, ${profile?.full_name?.split(" ")[0] || "there"} 👋` : "Campus Canteen"}</p>
             </div>
-            <div className="flex gap-2 items-center">
+          </div>
+          <div className="flex gap-2 items-center">
               {user ? (
                 <button onClick={() => router.push("/orders")}
                   className="relative w-9 h-9 flex items-center justify-center rounded-xl bg-slate-100 hover:bg-slate-200 text-slate-600 transition-colors">
@@ -574,7 +581,56 @@ export default function StudentInterface() {
             ))}
           </motion.div>
         )}
+
       </main>
+
+      {/* Sidebar Drawer */}
+      <AnimatePresence>
+        {isSidebarOpen && (
+          <>
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              onClick={() => setIsSidebarOpen(false)}
+              className="fixed inset-0 bg-slate-900/40 backdrop-blur-sm z-[60]"
+            />
+            <motion.div
+              initial={{ x: "-100%" }}
+              animate={{ x: 0 }}
+              exit={{ x: "-100%" }}
+              transition={{ type: "spring", damping: 25, stiffness: 200 }}
+              className="fixed top-0 left-0 bottom-0 w-72 bg-white z-[70] shadow-2xl flex flex-col border-r border-slate-100"
+            >
+              <div className="p-4 flex items-center justify-between border-b border-slate-100">
+                <span className="font-black text-lg qb-text-gradient">QuickBite</span>
+                <button onClick={() => setIsSidebarOpen(false)} className="text-slate-400 hover:text-slate-600 bg-slate-100 hover:bg-slate-200 p-1.5 rounded-full transition-colors">
+                  <X size={18} strokeWidth={2.5} />
+                </button>
+              </div>
+              <div className="p-6 flex-1">
+                <div className="bg-orange-50/50 rounded-3xl p-6 border border-orange-100 text-center">
+                  <div className="w-12 h-12 bg-white rounded-2xl flex items-center justify-center mx-auto mb-3 shadow-sm border border-orange-100">
+                    <span className="text-2xl">🎧</span>
+                  </div>
+                  <h3 className="text-slate-800 font-bold text-sm">Need Help?</h3>
+                  <p className="text-slate-500 text-xs mt-1 mb-4">Have an issue with your order? Reach out to our help desk.</p>
+                  <div className="space-y-2 text-xs font-medium text-slate-600">
+                    <div className="flex items-center justify-center gap-2">
+                      <span>✉️</span>
+                      <a href="mailto:aveshshaikh290307@gmail.com" className="hover:text-orange-600 transition-colors break-all">aveshshaikh290307@gmail.com</a>
+                    </div>
+                    <div className="flex items-center justify-center gap-2 mt-2">
+                      <span>📞</span>
+                      <span className="text-slate-400 italic">Phone: Coming Soon</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </motion.div>
+          </>
+        )}
+      </AnimatePresence>
 
       {/* Floating Cart Bar */}
       <AnimatePresence>
