@@ -40,7 +40,7 @@ import {
   Menu,
 } from "lucide-react";
 import { User } from "@supabase/supabase-js";
-import { motion, AnimatePresence } from "framer-motion";
+import { motion, AnimatePresence, type Variants } from "framer-motion";
 
 /* ─── Types ─────────────────────────────────────────── */
 type MenuItem = {
@@ -54,28 +54,28 @@ type MenuItem = {
 type CartItem = MenuItem & { quantity: number };
 
 /* ─── Animation Variants ─────────────────────────────── */
-const pageVariants = {
+const pageVariants: Variants = {
   initial: { opacity: 0, y: 24 },
-  animate: { opacity: 1, y: 0, transition: { duration: 0.4, ease: [0.22, 1, 0.36, 1] as const } },
-  exit: { opacity: 0, y: -16, transition: { duration: 0.25, ease: "easeIn" } },
+  animate: { opacity: 1, y: 0 },
+  exit: { opacity: 0, y: -16 },
 };
 
-const staggerContainer = {
+const staggerContainer: Variants = {
   initial: {},
   animate: { transition: { staggerChildren: 0.07, delayChildren: 0.1 } },
 };
 
-const itemFadeUp = {
+const itemFadeUp: Variants = {
   initial: { opacity: 0, y: 20, scale: 0.97 },
-  animate: { opacity: 1, y: 0, scale: 1, transition: { duration: 0.35, ease: [0.22, 1, 0.36, 1] as const } },
+  animate: { opacity: 1, y: 0, scale: 1 },
 };
 
-const cartBarVariants = {
+const cartBarVariants: Variants = {
   hidden: { y: 120, opacity: 0 },
   visible: { y: 0, opacity: 1, transition: { type: "spring", stiffness: 340, damping: 28 } },
 };
 
-const ticketVariants = {
+const ticketVariants: Variants = {
   initial: { opacity: 0, scale: 0.7, rotate: -3 },
   animate: { opacity: 1, scale: 1, rotate: 0, transition: { type: "spring", stiffness: 260, damping: 22, delay: 0.1 } },
 };

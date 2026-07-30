@@ -5,16 +5,12 @@ import { useRouter } from "next/navigation";
 import { supabase } from "@/lib/supabase";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import { motion, AnimatePresence } from "framer-motion";
+import { motion, AnimatePresence, type Variants } from "framer-motion";
 import { Mail, Lock, User, Phone, ArrowLeft, Eye, EyeOff, Zap, AlertCircle } from "lucide-react";
 
-const inputVariants = {
+const inputVariants: Variants = {
   initial: { opacity: 0, x: -16 },
-  animate: (i: number) => ({
-    opacity: 1,
-    x: 0,
-    transition: { delay: i * 0.08, duration: 0.3, ease: [0.22, 1, 0.36, 1] as const },
-  }),
+  animate: { opacity: 1, x: 0 },
 };
 
 export default function LoginPage() {

@@ -7,7 +7,7 @@ import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/com
 import { Badge } from "@/components/ui/badge";
 import { ArrowLeft, Clock, Loader2, RefreshCw, Package } from "lucide-react";
 import { User } from "@supabase/supabase-js";
-import { motion, AnimatePresence } from "framer-motion";
+import { motion, AnimatePresence, type Variants } from "framer-motion";
 
 /* ─── Types ─────────────────────────────────────────── */
 type OrderItem = {
@@ -60,9 +60,9 @@ function StatusBadge({ status }: { status: Order["status"] }) {
   );
 }
 
-const cardVariants = {
+const cardVariants: Variants = {
   initial: { opacity: 0, y: 16 },
-  animate: { opacity: 1, y: 0, transition: { duration: 0.3, ease: [0.22, 1, 0.36, 1] as const } },
+  animate: { opacity: 1, y: 0 },
 };
 
 /* ─── Page ───────────────────────────────────────────── */
