@@ -80,7 +80,7 @@ function formatPrice(n: number): string {
 }
 
 /* ─── Gate Screen ────────────────────────────────────── */
-const ADMIN_PASS = process.env.NEXT_PUBLIC_ADMIN_PASSWORD ?? "quickbite@admin";
+const ADMIN_PASS = process.env.NEXT_PUBLIC_ADMIN_PASSWORD || "";
 
 function AdminGate({ onUnlock }: { onUnlock: () => void }) {
   const [input, setInput] = useState("");
@@ -166,12 +166,6 @@ function AdminGate({ onUnlock }: { onUnlock: () => void }) {
           >
             Unlock Dashboard
           </Button>
-
-          <p className="text-slate-500 text-xs text-center">
-            Default: <code className="text-slate-400 bg-slate-700 px-1.5 py-0.5 rounded">quickbite@admin</code>
-            <br />
-            Set <code className="text-slate-400">NEXT_PUBLIC_ADMIN_PASSWORD</code> in .env.local to change.
-          </p>
         </form>
       </div>
 

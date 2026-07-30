@@ -60,6 +60,7 @@ const pageVariants = {
 };
 
 const staggerContainer = {
+  initial: {},
   animate: { transition: { staggerChildren: 0.07, delayChildren: 0.1 } },
 };
 
@@ -554,7 +555,7 @@ export default function StudentInterface() {
             {searchQuery && <button onClick={() => setSearchQuery("")} className="mt-4 text-orange-600 text-sm font-medium hover:underline">Clear search</button>}
           </motion.div>
         ) : (
-          <motion.div variants={staggerContainer} initial="initial" animate="animate" className="space-y-6">
+          <motion.div key={activeCategory + searchQuery} variants={staggerContainer} initial="initial" animate="animate" className="space-y-6">
             {Object.entries(groupedItems).map(([category, items]) => (
               <motion.section key={category} variants={itemFadeUp}>
                 <div className="flex items-center gap-2 mb-3">
@@ -661,7 +662,7 @@ export default function StudentInterface() {
                 <h4 className="font-bold text-indigo-900 text-sm">Payment Required</h4>
               </div>
               <p className="text-xs text-indigo-600/80 mb-3 leading-relaxed">Complete payment via any UPI app before confirming your order.</p>
-              <a href={`upi://pay?pa=canteen@upi&pn=QuickBite&am=${cartTotal}&cu=INR`}
+              <a href={`upi://pay?pa=${process.env.NEXT_PUBLIC_UPI_ID || ""}&pn=QuickBite&am=${cartTotal}&cu=INR`}
                 className="flex items-center justify-center gap-2 w-full bg-white text-indigo-700 font-bold py-3 rounded-xl border border-indigo-200 hover:bg-indigo-50 transition-colors shadow-sm text-sm"
                 target="_blank" rel="noreferrer">
                 💳 Pay ₹{cartTotal} via UPI App

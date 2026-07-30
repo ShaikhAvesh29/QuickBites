@@ -100,18 +100,21 @@ export default function MyOrdersPage() {
   }, []);
 
   useEffect(() => {
+    let isMounted = true;
     let channel: ReturnType<typeof supabase.channel> | null = null;
 
     const init = async () => {
       const { data: { user } } = await supabase.auth.getUser();
 
       if (!user) {
-        router.replace("/login");
+        if (isMounted) router.replace("/login");
         return;
       }
 
-      setUser(user);
+      if (isMounted) setUser(user);
       await fetchOrders(user.id);
+
+      if (!isMounted) return;
 
       // Realtime: keep active order statuses up-to-date
       channel = supabase
@@ -137,6 +140,7 @@ export default function MyOrdersPage() {
     init();
 
     return () => {
+      isMounted = false;
       if (channel) supabase.removeChannel(channel);
     };
   }, [router, fetchOrders]);
