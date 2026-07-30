@@ -249,7 +249,7 @@ export default function AdminDashboard() {
         .order("name", { ascending: true });
 
       if (error) throw error;
-      const items = (data as MenuItem[]) ?? [];
+      const items = (data as unknown as MenuItem[]) ?? [];
       setMenuItems(items);
       // Seed controlled price inputs
       const priceMap: Record<string, string> = {};

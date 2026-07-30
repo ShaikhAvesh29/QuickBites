@@ -89,7 +89,7 @@ export default function MyOrdersPage() {
         .order("created_at", { ascending: false });
 
       if (error) throw error;
-      setOrders((data as Order[]) ?? []);
+      setOrders((data as unknown as Order[]) ?? []);
     } catch (err: unknown) {
       const msg = err instanceof Error ? err.message : "Failed to load orders.";
       console.error("[Orders] fetchOrders:", err);
