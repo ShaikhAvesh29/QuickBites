@@ -56,7 +56,7 @@ type CartItem = MenuItem & { quantity: number };
 /* ─── Animation Variants ─────────────────────────────── */
 const pageVariants = {
   initial: { opacity: 0, y: 24 },
-  animate: { opacity: 1, y: 0, transition: { duration: 0.4, ease: [0.22, 1, 0.36, 1] } },
+  animate: { opacity: 1, y: 0, transition: { duration: 0.4, ease: [0.22, 1, 0.36, 1] as const } },
   exit: { opacity: 0, y: -16, transition: { duration: 0.25, ease: "easeIn" } },
 };
 
@@ -67,7 +67,7 @@ const staggerContainer = {
 
 const itemFadeUp = {
   initial: { opacity: 0, y: 20, scale: 0.97 },
-  animate: { opacity: 1, y: 0, scale: 1, transition: { duration: 0.35, ease: [0.22, 1, 0.36, 1] } },
+  animate: { opacity: 1, y: 0, scale: 1, transition: { duration: 0.35, ease: [0.22, 1, 0.36, 1] as const } },
 };
 
 const cartBarVariants = {
