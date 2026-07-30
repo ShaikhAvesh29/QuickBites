@@ -700,7 +700,7 @@ export default function StudentInterface() {
             </div>
             <div className="space-y-1.5">
               <Label htmlFor="pickup-time" className="text-xs font-bold uppercase tracking-widest text-slate-400">Pickup Time</Label>
-              <Select value={pickupTime} onValueChange={setPickupTime}>
+              <Select value={pickupTime} onValueChange={(v) => setPickupTime(v ?? "")}>
                 <SelectTrigger id="pickup-time" className="bg-slate-50 border-slate-200 rounded-xl py-6 text-sm">
                   <div className="flex items-center gap-2">
                     <Clock className="w-4 h-4 text-orange-500" />
